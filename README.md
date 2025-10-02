@@ -77,6 +77,6 @@ Vous pouvez ensuite servir le dossier `dist/` avec n’importe quel serveur stat
 
 ## Stack principale
 
-- React 18, react-three-fiber, drei, three
-- Parcel 2 pour le bundling
-- styled-components, TailwindCSS, GSAP, Framer Motion
+- React 18
+- Parcel 2 
+- React Bits
