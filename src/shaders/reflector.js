@@ -1,10 +1,9 @@
 import React, { useMemo } from "react";
 import { PlaneGeometry, RepeatWrapping } from "three";
-import { useControls } from "leva";
 import { Reflector } from "./CustomReflector";
 import { useTexture } from "@react-three/drei";
 import { extend } from "@react-three/fiber";
-// -- https://polyhaven.com/a/rock_wall_04 -- //
+// Textures from https://polyhaven.com/a/rock_wall_04
 import FloorTexture from "../assets/rock_wall_04_rough_2kv3.jpg";
 import FloorNormal from "../assets/rock_wall_04_normal_2kv2.jpg";
 
@@ -12,11 +11,6 @@ import FloorNormal from "../assets/rock_wall_04_normal_2kv2.jpg";
 extend({ Reflector });
 
 const Mirror = (props) => {
-    // use the controls to tweak your texture offset to the best spot
-    // const ctrls = useControls({
-    //     offsetX: { value: 0.49, min: 0, max: 1, step: 0.01 },
-    //     offsetY: { value: 0.36, min: 0, max: 1, step: 0.01 },
-    // });
     const [floor, normal] = useTexture([FloorTexture, FloorNormal]);
     floor.wrapS = RepeatWrapping;
     floor.wrapT = RepeatWrapping;

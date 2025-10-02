@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { gsap } from "gsap";
 import { Canvas } from "@react-three/fiber";
-import { useNavigate } from "react-router-dom";
 import App3D from "../app";
 import LightRays from "../components/LightRays.jsx";
 import MagicBento from "../components/MagicBento.jsx";
@@ -11,7 +10,7 @@ import LogoLoop from "../components/LogoLoop.jsx";
 import ElectricBorder from "../components/ElectricBorder.jsx";
 import ProfileCard from "../components/ProfileCard.jsx";
 import LikeButton from "../components/LikeButton.jsx";
-// Logos for loops
+// Logos used in the marquee loop
 import grandMA2Logo from "../assets/grandMA2-Photoroom.png";
 import laNetLogo from "../assets/lanet.png";
 import qlcLogo from "../assets/QLC+.png";
@@ -37,6 +36,7 @@ const Hero = styled.section`
     overflow: hidden;
 `;
 
+// Wrapper for 3D hero + blur mask on scroll
 const HeroInner = styled.div`
     position: absolute;
     inset: 0;
@@ -58,6 +58,7 @@ const HeroInner = styled.div`
     }};
 `;
 
+// 3D Canvas visibility wrapper
 const CanvasWrap = styled.div`
     position: absolute;
     inset: 0;
@@ -98,7 +99,7 @@ const LeftTitle = styled.h1`
         font-style: normal;
     }
 
-    /* Portrait layout: center title above the logo and hide right title */
+    /* Portrait: center title above the logo, hide right title */
     @media (orientation: portrait) {
         left: 50%;
         top: 20%;
@@ -152,8 +153,6 @@ const RightTitle = styled.h1`
     }
 `;
 
-// Shiny removed per request; leave plain text for CLUB
-
 const Content = styled.div`
     position: relative;
     z-index: 3;
@@ -161,7 +160,7 @@ const Content = styled.div`
     overflow: visible;
 `;
 
-// Horizontal logo loop container styles
+// Horizontal logo loop container
 const LoopSection = styled.section`
     position: relative;
     z-index: 3;
@@ -177,7 +176,7 @@ const LoopSection = styled.section`
 const SliderSection = styled.section`
     position: relative;
     z-index: 3;
-    /* Match Magic Bento/LoopSection width */
+    /* Match other section width */
     max-width: 54em;
     margin: clamp(32px, 7vw, 96px) auto;
     padding: 0 clamp(16px, 4vw, 24px);
@@ -196,7 +195,7 @@ const SliderTitle = styled.h3`
     font-size: clamp(18px, 3.4vw, 28px);
     margin: 0 0 12px 0;
     flex: 1 1 auto;
-    min-width: 0; /* allow flexbox to shrink line */
+    min-width: 0; /* allow flexbox to shrink */
     word-break: break-word;
     hyphens: auto;
     @media (max-width: 640px) {
@@ -238,7 +237,7 @@ const SwipeHint = styled.div`
 
 const SliderViewport = styled.div`
     width: 100%;
-    /* Match Magic Bento width and center */
+    /* Match width and center */
     max-width: 54em;
     margin: 0 auto;
     position: relative;
@@ -249,13 +248,13 @@ const SliderViewport = styled.div`
     /* Snap to center so each card parks centered */
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    /* Match Magic Bento responsive scale */
+    /* Match section responsive scale */
     font-size: clamp(1rem, 0.9rem + 0.5vw, 1.5rem);
     /* Hide horizontal scrollbar while keeping scroll */
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE/Edge */
     &::-webkit-scrollbar { display: none; }
-    /* Soft side fade, same approach as Hero's mask (not backdrop blur) */
+    /* Soft side fade like Hero's mask */
     --side-fade: clamp(24px, 8vw, 96px);
     -webkit-mask-image: linear-gradient(
       to right,
@@ -277,7 +276,7 @@ const SliderTrack = styled.div`
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: min(368px, 82vw);
-    /* reduced spacing between cards */
+    /* Spacing between cards */
     gap: clamp(28px, 5vw, 72px);
     align-items: start;
 `;
@@ -558,7 +557,6 @@ const Home = () => {
     const sliderRef = React.useRef(null);
     const sliderViewportRef = React.useRef(null);
     const jeanSlideRef = React.useRef(null);
-    const navigate = useNavigate();
     const [blurProgress, setBlurProgress] = useState(0);
     const [isPortrait, setIsPortrait] = useState(() =>
         typeof window !== 'undefined' ? window.matchMedia('(orientation: portrait)').matches : false
@@ -637,8 +635,7 @@ const Home = () => {
         };
     }, []);
 
-    // (Scroll cue removed)
-    // Staggered reveal after loader: show 3D, then titles 1s later
+    // Reveal after loader: show 3D, then titles after 1s
     React.useEffect(() => {
         if (!isLoaded) {
             setShowCanvas(false);
@@ -670,7 +667,7 @@ const Home = () => {
         };
     }, [isLoaded, logoSettled]);
 
-    // On browser reload, auto-scroll a lot, then freeze scroll briefly
+    // On reload: auto-scroll then briefly freeze scroll
     React.useEffect(() => {
         // Run only after intro (titles visible) so page is scrollable
         if (!showTitles) return;
@@ -712,7 +709,7 @@ const Home = () => {
         };
     }, [showTitles]);
 
-    // Prevent page scroll until titles are shown (intro complete)
+    // Prevent page scroll until titles are shown
     React.useEffect(() => {
         const body = document.body;
         if (!showTitles) {
