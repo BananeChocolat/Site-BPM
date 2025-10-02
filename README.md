@@ -1,6 +1,6 @@
 ## Site Web BPM — Démarrage rapide
 
-Ce dépôt contient le site web BPM basé sur React, Three.js (react-three-fiber) et Parcel.
+Ce dépôt contient un example de site web pour BPM basé sur React, Three.js et Parcel.
 
 ## Prérequis
 
