@@ -1,0 +1,11 @@
+.parcel-cache
+dist
+node_modules
+.git
+.gitignore
+*.log
+*.tmp
+*.swp
+.DS_Store
+coverage
+*:Zone.Identifier

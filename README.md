@@ -1,24 +1,15 @@
-## Site Web BPM — Démarrage rapide
+## Site Web BPM — Vue 3 + TypeScript
 
-Ce dépôt contient un example de site web pour BPM basé sur React, Three.js et Parcel.
+Ce dépôt contient un site statique BPM construit avec Vue 3, TypeScript et Vite.
+Pages disponibles : `/`, `/equipe`, `/event`.
 
 ## Prérequis
 
 - Node.js `>=24 <25` (un fichier `.nvmrc` est fourni)
-  - Avec nvm : `nvm install` puis `nvm use`
-- Gestionnaire de paquets : pnpm (recommandé) ou npm
-  - Activer Corepack (recommandé) : `corepack enable`
-  - Sinon : `npm i -g pnpm`
+  - Avec nvm : `nvm install` puis `nvm use`
+- Gestionnaire de paquets : npm
 
 ## Installation
-
-Avec pnpm (recommandé) :
-
-```bash
-pnpm install
-```
-
-Ou avec npm :
 
 ```bash
 npm install
@@ -26,57 +17,46 @@ npm install
 
 ## Lancer en développement
 
-- Avec pnpm :
-
 ```bash
-pnpm start
+npm run dev
 ```
 
-- Avec npm :
-
-```bash
-npm run start
-```
-
-- Via Makefile (équivalent npm) :
-
-```bash
-make dev
-```
-
-Par défaut, Parcel ouvre le navigateur et sert l’app sur `http://localhost:1234`.
+Par défaut, Vite sert l'app sur `http://localhost:5173`.
 
 ## Build de production
 
-Générer les fichiers statiques dans `dist/` :
+Générer les fichiers statiques dans `dist/` :
 
 ```bash
-pnpm build
-# ou
 npm run build
 ```
 
-Vous pouvez ensuite servir le dossier `dist/` avec n’importe quel serveur statique.
+Prévisualiser le build localement :
 
-## Scripts utiles
+```bash
+npm run preview
+```
 
-- `pnpm lowres-imgs` / `npm run lowres-imgs` : génère des versions basse résolution des images (nécessite `sharp`).
+## Docker
 
-## Dépannage
+Construire l'image (multi-stage) :
 
-- Version de Node : assurez‑vous d’utiliser Node 24 (`nvm use`).
-- Port déjà utilisé : lancez avec un port personnalisé :
+```bash
+docker build -t site-bpm .
+```
 
-  ```bash
-  pnpm start -- --port 3001
-  # ou
-  npm run start -- --port 3001
-  ```
+Lancer le conteneur et exposer le site sur `http://localhost:8080` :
 
-- pnpm introuvable : `corepack enable` puis réessayez, ou installez pnpm globalement (`npm i -g pnpm`).
+```bash
+docker run --rm -p 8080:80 site-bpm
+```
 
-## Stack principale
+Le conteneur construit le bundle avec npm/Vite puis le sert via Nginx avec un fallback `index.html` pour les routes client.
 
-- React 18
-- Parcel 2 
-- React Bits
+### Docker Compose (prod)
+
+```bash
+docker compose up --build
+```
+
+Le service unique `site` build l'image et mappe le port `8080` sur `80` du conteneur.
