@@ -3,6 +3,7 @@ import StaggeredMenu from "@/components/StaggeredMenu";
 import { menuItems, socialItems } from "@/data/menu";
 import { teamNodes, type TeamNode } from "@/data/team";
 import logoUrl from "@/assets/logo.png";
+import bpmWatermark from "@/assets/BPM_logo_clean.png";
 import "./TeamView.css";
 
 const MIN_SCALE = 0.55;
@@ -121,13 +122,17 @@ const TeamView: React.FC = () => {
         menuButtonColor="#ffffff"
         openMenuButtonColor="#fff"
         changeMenuColorOnOpen={true}
-        colors={["#B19EEF", "#5227FF"]}
+        colors={["#ffffff", "#9a9a9a", "#000000"]}
         logoUrl={logoUrl}
-        accentColor="#5227FF"
+        accentColor="#111111"
         isFixed
       />
 
       <section className="team-frame">
+        <img className="team-watermark" src={bpmWatermark} alt="" aria-hidden="true" />
+        <div className="team-bg-number" aria-hidden="true">
+          27
+        </div>
         <div className="team-label">Organigramme</div>
         <div className="team-toolbar">
           <button type="button" className="team-button" onClick={() => zoomBy(1.12)}>

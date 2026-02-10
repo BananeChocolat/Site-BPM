@@ -1,20 +1,22 @@
-import DomeImg1 from "@/assets/egeg.jpg";
-import DomeImg2 from "@/assets/egeggg.jpg";
-import DomeImg3 from "@/assets/ec1.jpg";
-import DomeImg4 from "@/assets/ec2.jpg";
-import DomeImg5 from "@/assets/side.jpg";
-import DomeImg6 from "@/assets/samy.jpg";
-
 export type EventImage = {
   src: string;
   alt: string;
 };
 
-export const eventImages: EventImage[] = [
-  { src: DomeImg1, alt: "Show light 1" },
-  { src: DomeImg2, alt: "Show light 2" },
-  { src: DomeImg3, alt: "Scene image 1" },
-  { src: DomeImg4, alt: "Scene image 2" },
-  { src: DomeImg5, alt: "Scene image 3" },
-  { src: DomeImg6, alt: "Scene image 4" }
-];
+const soireeImageModules = import.meta.glob("../assets/soirée/*.{jpg,jpeg,png,webp}", {
+  eager: true,
+  import: "default"
+}) as Record<string, string>;
+
+const toAltFromPath = (path: string) => {
+  const fileName = path.split("/").pop() ?? "Photo";
+  const noExt = fileName.replace(/\.[^.]+$/, "");
+  return `Soiree ${noExt}`;
+};
+
+export const eventImages: EventImage[] = Object.entries(soireeImageModules)
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([path, src]) => ({
+    src,
+    alt: toAltFromPath(path)
+  }));

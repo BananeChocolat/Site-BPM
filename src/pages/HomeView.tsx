@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import StaggeredMenu from "@/components/StaggeredMenu";
 import MagicBento from "@/components/MagicBento";
 import DomeGallery from "@/components/DomeGallery";
@@ -9,14 +9,40 @@ import { menuItems, socialItems } from "@/data/menu";
 import { equipmentCards } from "@/data/equipment";
 import { softwareLogos, trustLogos } from "@/data/logos";
 import { eventImages } from "@/data/events";
-import backgroundImage from "@/assets/light.png";
+import lightBackground from "@/assets/light.png";
+import mxBackground from "@/assets/mx.png";
 import logoUrl from "@/assets/logo.png";
 import logoSideRight from "@/assets/egeg.jpg";
 import logoSideLeft from "@/assets/egeggg.jpg";
+import bentoSideRight from "@/assets/ec1.jpg";
+import bentoSideLeft from "@/assets/ec2.jpg";
 import "./HomeView.css";
 
 const HomeView: React.FC = () => {
+  const heroVariant = useMemo<"light" | "mx">(() => (Math.random() < 0.5 ? "mx" : "light"), []);
+  const heroSide = heroVariant === "mx" ? "left" : "right";
+  const oppositeHeroSide = heroSide === "left" ? "right" : "left";
+  const [menuPosition, setMenuPosition] = useState<"left" | "right">(heroSide);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const x32Card = document.querySelector<HTMLElement>('.magic-bento-card[data-card-id="behringer-x32"]');
+    if (!x32Card) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setMenuPosition(oppositeHeroSide);
+        } else {
+          setMenuPosition(heroSide);
+        }
+      },
+      { threshold: 0.45 }
+    );
+
+    observer.observe(x32Card);
+    return () => observer.disconnect();
+  }, [heroSide, oppositeHeroSide]);
 
   const handleTilt = (event: React.MouseEvent<HTMLDivElement>) => {
     const target = event.currentTarget as HTMLElement | null;
@@ -35,26 +61,26 @@ const HomeView: React.FC = () => {
   };
 
   return (
-    <main className="home">
+    <main className="home" data-hero-side={heroSide} data-hero-variant={heroVariant}>
       <StaggeredMenu
-        position="right"
+        position={menuPosition}
         items={menuItems}
         socialItems={socialItems}
         displaySocials
         displayItemNumbering={true}
         menuButtonColor="#ffffff"
-        openMenuButtonColor="#fff"
+        openMenuButtonColor="#000000"
         changeMenuColorOnOpen={true}
-        colors={["#B19EEF", "#5227FF"]}
+        colors={["#000000", "#ffffff"]}
         logoUrl={logoUrl}
-        accentColor="#5227FF"
+        accentColor="#000000"
         isFixed
         onMenuOpen={() => console.log("Menu opened")}
         onMenuClose={() => console.log("Menu closed")}
       />
 
       <section className="hero">
-        <img className="hero__backdrop" src={backgroundImage} alt="" aria-hidden="true" />
+        <img className="hero__backdrop" src={heroVariant === "mx" ? mxBackground : lightBackground} alt="" aria-hidden="true" />
         <div className="hero__content">
           <div className="hero__title">
             <h1>
@@ -75,6 +101,8 @@ const HomeView: React.FC = () => {
       </section>
 
       <section className="bento-section-block">
+        <img className="bento-side bento-side--right" src={bentoSideRight} alt="" aria-hidden="true" />
+        <img className="bento-side bento-side--left" src={bentoSideLeft} alt="" aria-hidden="true" />
         <div className="bento-section-inner">
           <h2 className="section-title bento-section-title">
             <RevealText text="Notre Équipement" step={8} />
@@ -90,7 +118,7 @@ const HomeView: React.FC = () => {
             clickEffect
             spotlightRadius={400}
             particleCount={12}
-            glowColor="132, 0, 255"
+            glowColor="255, 255, 255"
             disableAnimations={false}
           />
         </div>
@@ -106,6 +134,8 @@ const HomeView: React.FC = () => {
             maxVerticalRotationDeg={0}
             segments={34}
             dragDampening={2}
+            openedImageWidth="420px"
+            openedImageHeight="620px"
             grayscale={false}
           />
         </div>
@@ -126,13 +156,6 @@ const HomeView: React.FC = () => {
           </h2>
           <LogoMarquee items={trustLogos} speed={48} simple />
         </div>
-      </section>
-
-      <section className="event-section">
-        <img className="section-side section-side--right" src={logoSideRight} alt="" aria-hidden="true" />
-        <img className="section-side section-side--left" src={logoSideLeft} alt="" aria-hidden="true" />
-        <h2 className="event-section__title">NOS ÉVÉNEMENTS</h2>
-        <EventGallery images={eventImages} />
       </section>
 
       <section className="contact">

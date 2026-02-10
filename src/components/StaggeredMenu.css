@@ -23,11 +23,15 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 2em;
   background: transparent;
   pointer-events: none;
   z-index: 20;
+}
+
+[data-position='left'] .staggered-menu-header {
+  justify-content: flex-start;
 }
 
 .staggered-menu-header > * {

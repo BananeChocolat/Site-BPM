@@ -16,6 +16,38 @@
   overflow: hidden;
 }
 
+.team .staggered-menu-header {
+  top: 28px;
+}
+
+.team-watermark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(68vw, 880px);
+  height: auto;
+  transform: translate(-50%, -50%);
+  opacity: 0.1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}
+
+.team-bg-number {
+  position: absolute;
+  left: 50%;
+  top: clamp(56px, 18vh, 210px);
+  transform: translateX(-50%);
+  font-size: clamp(180px, 34vw, 520px);
+  line-height: 1;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.08);
+  letter-spacing: -0.04em;
+  pointer-events: none;
+  user-select: none;
+  z-index: 2;
+}
+
 .team-label {
   position: absolute;
   top: clamp(16px, 3vw, 24px);
@@ -74,6 +106,7 @@
   cursor: grab;
   background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   background-size: 40px 40px;
+  z-index: 2;
 }
 
 .team-viewport[data-dragging='true'] {

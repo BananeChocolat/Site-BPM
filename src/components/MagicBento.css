@@ -1,13 +1,9 @@
 :root {
-  --hue: 27;
-  --sat: 69%;
   --white: hsl(0, 0%, 100%);
-  --purple-primary: rgba(132, 0, 255, 1);
-  --purple-glow: rgba(132, 0, 255, 0.2);
-  --purple-border: rgba(132, 0, 255, 0.8);
-  --border-color: #392e4e;
-  --background-dark: #060010;
-  color-scheme: light dark;
+  --black: #000000;
+  --border-color: rgba(255, 255, 255, 0.2);
+  --border-glow: rgba(255, 255, 255, 0.35);
+  --background-dark: #000000;
 }
 
 .card-grid {
@@ -16,6 +12,7 @@
   padding: 0.75em;
   max-width: 54em;
   font-size: clamp(1rem, 0.9rem + 0.5vw, 1.5rem);
+  grid-auto-flow: row;
 }
 
 .magic-bento-card {
@@ -23,12 +20,13 @@
   flex-direction: column;
   justify-content: space-between;
   position: relative;
+  top: var(--card-offset-y, 0);
   aspect-ratio: 4/3;
   min-height: 200px;
   width: 100%;
   max-width: 100%;
   padding: 1.25em;
-  border-radius: 20px;
+  border-radius: 12px;
   border: 1px solid var(--border-color);
   background: var(--background-dark);
   font-weight: 300;
@@ -51,6 +49,7 @@
   display: flex;
   position: relative;
   color: var(--white);
+  z-index: 2;
 }
 
 .magic-bento-card__header {
@@ -61,6 +60,7 @@
 .magic-bento-card__content {
   flex-direction: column;
   gap: 0.35em;
+  padding-bottom: var(--media-height);
 }
 
 .magic-bento-card__label {
@@ -86,19 +86,23 @@
 }
 
 .magic-bento-card__media {
-  margin-top: auto;
-  height: clamp(90px, 18vh, 160px);
+  position: absolute;
+  right: 1.25em;
+  bottom: 1.25em;
+  height: var(--media-height);
+  width: calc(100% - 2.5em);
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
-  overflow: hidden;
+  overflow: visible;
+  z-index: 1;
 }
 
 .magic-bento-card__media img {
   width: 100%;
   height: auto;
   object-fit: contain;
-  opacity: 0.92;
+  opacity: 0.9;
 }
 
 .magic-bento-card--text-autohide .magic-bento-card__title,
@@ -142,12 +146,89 @@
 @media (min-width: 1024px) {
   .card-grid {
     grid-template-columns: repeat(4, 1fr);
-    grid-auto-flow: dense;
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    grid-template-areas:
+      "qsc qsc eclairage effets"
+      "qsc qsc dj dj"
+      "mixage controle dj dj";
   }
 
   .magic-bento-card.is-large {
-    grid-column: span 2;
-    grid-row: span 2;
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .magic-bento-card {
+    grid-column: var(--grid-column, auto);
+    grid-row: var(--grid-row, auto);
+  }
+
+  /* Lock equipment layout to avoid row drift */
+  .magic-bento-card[data-card-id="beam-5r"] {
+    grid-area: eclairage !important;
+  }
+
+  .magic-bento-card[data-card-id="ecrans-led"] {
+    grid-area: effets !important;
+  }
+
+  .magic-bento-card[data-card-id="cdj-2000-nexus-2"] {
+    grid-area: dj !important;
+  }
+
+  .magic-bento-card[data-card-id="qsc-ks118"] {
+    grid-area: qsc !important;
+    justify-content: flex-start;
+  }
+
+  .magic-bento-card[data-card-id="behringer-x32"] {
+    grid-area: mixage !important;
+  }
+
+  .magic-bento-card[data-card-id="grandma-command-wing"] {
+    grid-area: controle !important;
+  }
+
+  .magic-bento-card[data-card-id="qsc-ks118"] .magic-bento-card__media {
+    width: 110%;
+    height: 110%;
+    right: -5%;
+    bottom: -1200%;
+    justify-content: center;
+  }
+
+  .magic-bento-card[data-card-id="qsc-ks118"] .magic-bento-card__content {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .magic-bento-card[data-card-id="cdj-2000-nexus-2"] .magic-bento-card__content {
+    padding-bottom: clamp(170px, 32vh, 280px);
+  }
+
+  .magic-bento-card[data-card-id="cdj-2000-nexus-2"] .magic-bento-card__media {
+    width: 115%;
+    right: -7.5%;
+    bottom: 0%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .magic-bento-card[data-card-id="beam-5r"] .magic-bento-card__media {
+    width: 113%;
+    right: -11.5%;
+    bottom: -80%;
+  }
+
+  .magic-bento-card[data-card-id="ecrans-led"] .magic-bento-card__media {
+    width: 125%;
+    right: -12.5%;
+    bottom: -30%;
+  }
+  .magic-bento-card[data-card-id="behringer-x32"] .magic-bento-card__media {
+    width: 155%;
+    right: -12.5%;
+    bottom: -30%;
   }
 }
 
@@ -159,8 +240,8 @@
   padding: 6px;
   background: radial-gradient(
     var(--glow-radius) circle at var(--glow-x) var(--glow-y),
-    rgba(132, 0, 255, calc(var(--glow-intensity) * 0.8)) 0%,
-    rgba(132, 0, 255, calc(var(--glow-intensity) * 0.4)) 30%,
+    rgba(255, 255, 255, calc(var(--glow-intensity) * 0.5)) 0%,
+    rgba(255, 255, 255, calc(var(--glow-intensity) * 0.2)) 30%,
     transparent 60%
   );
   border-radius: inherit;
@@ -184,8 +265,8 @@
 
 .magic-bento-card--border-glow:hover {
   box-shadow:
-    0 4px 20px rgba(46, 24, 78, 0.4),
-    0 0 30px var(--purple-glow);
+    0 4px 20px rgba(0, 0, 0, 0.45),
+    0 0 22px var(--border-glow);
 }
 
 .particle-container {
@@ -200,15 +281,15 @@
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: rgba(132, 0, 255, 0.2);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   z-index: -1;
 }
 
 .particle-container:hover {
   box-shadow:
-    0 4px 20px rgba(46, 24, 78, 0.2),
-    0 0 30px var(--purple-glow);
+    0 4px 20px rgba(0, 0, 0, 0.25),
+    0 0 22px var(--border-glow);
 }
 
 /* Global spotlight styles */
@@ -225,8 +306,4 @@
 }
 .magic-bento-card.is-large {
   order: 10;
-}
-
-.magic-bento-card__media {
-  overflow: visible;
 }

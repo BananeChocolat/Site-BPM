@@ -4,53 +4,57 @@ import "./MagicBento.css";
 
 const DEFAULT_PARTICLE_COUNT = 12;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
-const DEFAULT_GLOW_COLOR = "132, 0, 255";
+const DEFAULT_GLOW_COLOR = "255, 255, 255";
 const MOBILE_BREAKPOINT = 768;
 
 type BentoCard = {
+  id?: string;
   label: string;
   title: string;
   description: string;
   color?: string;
   large?: boolean;
   image?: string;
-  imageOffsetY?: number;
+  imageOffsetY?: number | string;
   imageHeight?: string;
+  cardOffsetY?: number | string;
+  gridColumn?: string;
+  gridRow?: string;
 };
 
 const cardData: BentoCard[] = [
   {
-    color: "#060010",
+    color: "#000000",
     title: "Analytics",
     description: "Track user behavior",
     label: "Insights"
   },
   {
-    color: "#060010",
+    color: "#000000",
     title: "Dashboard",
     description: "Centralized data view",
     label: "Overview"
   },
   {
-    color: "#060010",
+    color: "#000000",
     title: "Collaboration",
     description: "Work together seamlessly",
     label: "Teamwork"
   },
   {
-    color: "#060010",
+    color: "#000000",
     title: "Automation",
     description: "Streamline workflows",
     label: "Efficiency"
   },
   {
-    color: "#060010",
+    color: "#000000",
     title: "Integration",
     description: "Connect favorite tools",
     label: "Connectivity"
   },
   {
-    color: "#060010",
+    color: "#000000",
     title: "Security",
     description: "Enterprise-grade protection",
     label: "Protection"
@@ -100,6 +104,7 @@ const updateCardGlowProperties = (
 type ParticleCardProps = {
   children: React.ReactNode;
   className?: string;
+  cardId?: string;
   disableAnimations?: boolean;
   style?: React.CSSProperties;
   particleCount?: number;
@@ -112,6 +117,7 @@ type ParticleCardProps = {
 const ParticleCard = ({
   children,
   className = "",
+  cardId,
   disableAnimations = false,
   style,
   particleCount = DEFAULT_PARTICLE_COUNT,
@@ -338,6 +344,7 @@ const ParticleCard = ({
   return (
     <div
       ref={cardRef}
+      data-card-id={cardId}
       className={`${className} particle-container`}
       style={{ ...style, position: "relative", overflow: "hidden" }}
     >
@@ -558,12 +565,29 @@ const MagicBento = ({
 
       <BentoCardGrid gridRef={gridRef}>
         {resolvedCards.map((card, index) => {
+          const cardId =
+            card.id ??
+            card.title
+              .toLowerCase()
+              .normalize("NFD")
+              .replace(/[\u0300-\u036f]/g, "")
+              .replace(/[^a-z0-9]+/g, "-")
+              .replace(/^-+|-+$/g, "");
           const baseClassName = `magic-bento-card ${card.large ? "is-large" : ""} ${textAutoHide ? "magic-bento-card--text-autohide" : ""} ${enableBorderGlow ? "magic-bento-card--border-glow" : ""}`;
           const cardProps = {
             className: baseClassName,
             style: {
               backgroundColor: card.color ?? "#000000",
-              "--glow-color": glowColor
+              "--glow-color": glowColor,
+              "--grid-column": card.gridColumn,
+              "--grid-row": card.gridRow,
+              "--media-height": card.imageHeight ?? "clamp(90px, 18vh, 160px)",
+              "--card-offset-y":
+                card.cardOffsetY !== undefined
+                  ? typeof card.cardOffsetY === "number"
+                    ? `${card.cardOffsetY}px`
+                    : card.cardOffsetY
+                  : undefined
             } as React.CSSProperties
           };
 
@@ -572,6 +596,7 @@ const MagicBento = ({
               <ParticleCard
                 key={index}
                 {...cardProps}
+                cardId={cardId}
                 disableAnimations={shouldDisableAnimations}
                 particleCount={particleCount}
                 glowColor={glowColor}
@@ -586,12 +611,20 @@ const MagicBento = ({
                   <h2 className="magic-bento-card__title">{card.title}</h2>
                   <p className="magic-bento-card__description">{card.description}</p>
                   {card.image && (
-                    <div className="magic-bento-card__media" style={{ height: card.imageHeight || undefined }}>
+                    <div className="magic-bento-card__media">
                       <img
                         src={card.image}
                         alt={card.title}
                         loading="lazy"
-                        style={card.imageOffsetY ? { transform: `translateY(${card.imageOffsetY}px)` } : undefined}
+                        style={
+                          card.imageOffsetY !== undefined
+                            ? {
+                                transform: `translateY(${
+                                  typeof card.imageOffsetY === "number" ? `${card.imageOffsetY}px` : card.imageOffsetY
+                                })`
+                              }
+                            : undefined
+                        }
                       />
                     </div>
                   )}
@@ -603,6 +636,7 @@ const MagicBento = ({
           return (
             <div
               key={index}
+              data-card-id={cardId}
               {...cardProps}
               ref={(el) => {
                 if (!el) return;
@@ -719,12 +753,20 @@ const MagicBento = ({
                 <h2 className="magic-bento-card__title">{card.title}</h2>
                 <p className="magic-bento-card__description">{card.description}</p>
                 {card.image && (
-                  <div className="magic-bento-card__media" style={{ height: card.imageHeight || undefined }}>
+                  <div className="magic-bento-card__media">
                     <img
                       src={card.image}
                       alt={card.title}
                       loading="lazy"
-                      style={card.imageOffsetY ? { transform: `translateY(${card.imageOffsetY}px)` } : undefined}
+                      style={
+                        card.imageOffsetY !== undefined
+                          ? {
+                              transform: `translateY(${
+                                typeof card.imageOffsetY === "number" ? `${card.imageOffsetY}px` : card.imageOffsetY
+                              })`
+                            }
+                          : undefined
+                      }
                     />
                   </div>
                 )}

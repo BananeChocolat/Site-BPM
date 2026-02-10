@@ -62,17 +62,15 @@ export const teamNodes: TeamNode[] = [
   { id: "ludmila", name: "Ludmila", title: "Ritz", photo: LudmilaPhoto, x: 100, y: 800 },
   { id: "quentin", name: "Quentin", title: "Ritz", photo: QuentinPhoto, x: -100, y: 800 },
 
-
-  { id: "ines", name: "Inès", title: "RE", photo: InesPhoto, x: -390, y: 900 },
-  { id: "martin", name: "Martin", title: "RE", photo: MartinPhoto, x: -130, y: 900 },
-  { id: "nicolas", name: "Nicolas", title: "Num", photo: NicolasRPhoto, x: -600, y: 900 },
-  { id: "william", name: "William", title: "Répa", photo: WilliamPhoto, x: -520, y: 1100 },
-
-  { id: "slavik", name: "Slavik", title: "Com", photo: SlavikPhoto, x: 390, y: 900 },
   { id: "william", name: "William", title: "Répa", photo: WilliamPhoto, x: -500, y: 600 },
-  { id: "ludmila", name: "Ludmila", title: "Ritz", photo: LudmilaPhoto, x: -260, y: 1100 },
-  { id: "quentin", name: "Quentin", title: "Ritz", photo: QuentinPhoto, x: 0, y: 1100 },
-  { id: "zeineb", name: "Zeineb", title: "RI", photo: ZeinebPhoto, x: 260, y: 1100 },
-  { id: "loup", name: "Loup", title: "RI", photo: LoupPhoto, x: 520, y: 1100 },
-   { id: "lucas", name: "Lucas", title: "Membre Lights", photo: LucasPhoto, x: -520, y: 380 },
+  { id: "nicolas", name: "Nicolas", title: "Num", photo: NicolasRPhoto, x: -400, y: 850 },
+
+
+  { id: "ines", name: "Inès", title: "RE", photo: InesPhoto, x: -750, y: 650 },
+  { id: "martin", name: "Martin", title: "RE", photo: MartinPhoto, x: -650, y: 900 },
+
+  { id: "slavik", name: "Slavik", title: "Com", photo: SlavikPhoto, x: 400, y: 850 },
+  { id: "zeineb", name: "Zeineb", title: "RI", photo: ZeinebPhoto, x: 750, y: 650 },
+  { id: "loup", name: "Loup", title: "RI", photo: LoupPhoto, x: 650, y: 900 },
+  { id: "lucas", name: "Lucas", title: "Membre Lights", photo: LucasPhoto, x: 500, y: 600 },
 ];
