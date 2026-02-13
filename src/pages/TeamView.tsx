@@ -2,8 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import StaggeredMenu from "@/components/StaggeredMenu";
 import { menuItems, socialItems } from "@/data/menu";
 import { teamNodes, type TeamNode } from "@/data/team";
-import logoUrl from "@/assets/logo.png";
-import bpmWatermark from "@/assets/BPM_logo_clean.png";
+import bpmWatermark from "@/assets/BPM_typo.png";
 import "./TeamView.css";
 
 const MIN_SCALE = 0.55;
@@ -150,7 +149,6 @@ const TeamView: React.FC = () => {
         openMenuButtonColor="#000000"
         changeMenuColorOnOpen={true}
         colors={["#ffffff", "#9a9a9a", "#000000"]}
-        logoUrl={logoUrl}
         accentColor="#111111"
         isFixed
       />

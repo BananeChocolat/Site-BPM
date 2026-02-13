@@ -11,7 +11,7 @@ import { softwareLogos, trustLogos } from "@/data/logos";
 import { eventImages } from "@/data/events";
 import lightBackground from "@/assets/light.png";
 import mxBackground from "@/assets/mx.png";
-import logoUrl from "@/assets/logo.png";
+import logoUrl from "@/assets/BPM_logo.png";
 import logoSideRight from "@/assets/egeg.jpg";
 import logoSideLeft from "@/assets/egeggg.jpg";
 import bentoSideRight from "@/assets/ec1.jpg";
@@ -58,7 +58,6 @@ const HomeView: React.FC = () => {
         openMenuButtonColor="#000000"
         changeMenuColorOnOpen={true}
         colors={["#000000", "#ffffff"]}
-        logoUrl={logoUrl}
         accentColor="#000000"
         isFixed
         onMenuOpen={() => console.log("Menu opened")}
@@ -76,7 +75,7 @@ const HomeView: React.FC = () => {
           </div>
           <div className="hero__logo">
             <div className="hero__tilt" onMouseMove={handleTilt} onMouseLeave={resetTilt}>
-              <img src={logoUrl} alt="BPM Club logo" style={{ transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)` }} />
+              <img src={logoUrl} alt="BPM Logo" style={{ transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)` }} />
             </div>
           </div>
           <div className="scroll-cue">

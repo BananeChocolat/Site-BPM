@@ -1,7 +1,6 @@
 import React from "react";
 import StaggeredMenu from "@/components/StaggeredMenu";
 import { menuItems, socialItems } from "@/data/menu";
-import logoUrl from "@/assets/logo.png";
 import "./EventView.css";
 
 const EventView: React.FC = () => {
@@ -17,7 +16,6 @@ const EventView: React.FC = () => {
         openMenuButtonColor="#fff"
         changeMenuColorOnOpen={true}
         colors={["#B19EEF", "#5227FF"]}
-        logoUrl={logoUrl}
         accentColor="#5227FF"
         isFixed
       />
