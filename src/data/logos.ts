@@ -3,6 +3,9 @@ import logo_QLC from "@/assets/software/QLC.png";
 import logo_capture from "@/assets/software/capture.png";
 import logo_sketchup from "@/assets/software/sketchup.png";
 import logo_vectorworks from "@/assets/software/vectorworks.png";
+import logo_resolume from "@/assets/software/resolume.png";
+import logo_ableton from "@/assets/software/ableton.png";
+
 
 import logo_tedx from "@/assets/partners/tedx.png";
 import logo_tsp from "@/assets/partners/tsp.png";
@@ -24,7 +27,9 @@ export const softwareLogos: LogoItem[] = [
   { image: logo_QLC, alt: "QLC+", primary: "QLC+" },
   { image: logo_sketchup, alt: "SketchUp", primary: "SketchUp" },
   { image: logo_vectorworks, alt: "Vectorworks", primary: "Vectorworks" },
-  { image: logo_capture, alt: "Capture", primary: "Capture" }
+  { image: logo_capture, alt: "Capture", primary: "Capture" },
+  { image: logo_resolume, alt: "Resolume Arena", primary: "Resolume Arena" },
+  { image: logo_ableton, alt: "Ableton", primary: "Ableton" }
 ];
 
 export const trustLogos: LogoItem[] = [
@@ -33,7 +38,6 @@ export const trustLogos: LogoItem[] = [
   { image: logo_technoparade, alt: "Techno Parade", primary: "Techno Parade" },
   { image: logo_tsp, alt: "Télécom SudParis", primary: "Télécom SudParis" },
   { image: logo_ipparis, alt: "Institut Polytechnique de Paris", primary: "Institut Polytechnique de Paris" },
-  { image: logo_lacoustics, alt: "LAcoustics", primary: "LAcoustics" },
   { image: logo_imtbs, alt: "IMT Business School", primary: "IMT Business School" },
   { image: logo_nava, alt: "Nava Collectif", primary: "Nava" }
 ];
