@@ -89,7 +89,7 @@ const HomeView: React.FC = () => {
         <img className="bento-side bento-side--right" src={bentoSideRight} alt="" aria-hidden="true" />
         <img className="bento-side bento-side--left" src={bentoSideLeft} alt="" aria-hidden="true" />
         <div className="bento-section-inner">
-          <h2 className="section-title bento-section-title noselect">
+          <h2 className="section-title noselect">
             <RevealText text="Notre Équipement" />
           </h2>
           <MagicBento
@@ -110,7 +110,7 @@ const HomeView: React.FC = () => {
       </section>
 
       <section className="dome-section">
-        <h2 className="section-title bento-section-title noselect">
+        <h2 className="section-title noselect">
           <RevealText text="Nos Événements" />
         </h2>
         <div className="dome-frame">
