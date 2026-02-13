@@ -64,7 +64,7 @@ const HomeView: React.FC = () => {
         onMenuClose={() => console.log("Menu closed")}
       />
 
-      <section className="hero">
+      <section className="hero noselect">
         <img className="hero__backdrop" src={heroVariant === "mx" ? mxBackground : lightBackground} alt="" aria-hidden="true" />
         <div className="hero__content">
           <div className="hero__title">
@@ -89,8 +89,8 @@ const HomeView: React.FC = () => {
         <img className="bento-side bento-side--right" src={bentoSideRight} alt="" aria-hidden="true" />
         <img className="bento-side bento-side--left" src={bentoSideLeft} alt="" aria-hidden="true" />
         <div className="bento-section-inner">
-          <h2 className="section-title bento-section-title">
-            <RevealText text="Notre Équipement" step={8} />
+          <h2 className="section-title bento-section-title noselect">
+            <RevealText text="Notre Équipement" />
           </h2>
           <MagicBento
             cards={equipmentCards}
@@ -110,7 +110,9 @@ const HomeView: React.FC = () => {
       </section>
 
       <section className="dome-section">
-        <h2 className="section-title dome-section__title">NOS ÉVÉNEMENTS</h2>
+        <h2 className="section-title bento-section-title noselect">
+          <RevealText text="Nos Événements" />
+        </h2>
         <div className="dome-frame">
           <DomeGallery
             images={eventImages}
@@ -130,14 +132,14 @@ const HomeView: React.FC = () => {
         <img className="section-side section-side--right" src={logoSideRight} alt="" aria-hidden="true" />
         <img className="section-side section-side--left" src={logoSideLeft} alt="" aria-hidden="true" />
         <div className="logo-section__group">
-          <h2 className="section-title">
-            <RevealText text="Logiciels que nous maîtrisons" step={8} />
+          <h2 className="section-title noselect">
+            <RevealText text="Logiciels que nous maîtrisons" />
           </h2>
           <LogoMarquee items={softwareLogos} speed={42} />
         </div>
         <div className="logo-section__group">
-          <h2 className="section-title">
-            <RevealText text="Ils nous font confiance" step={8} />
+          <h2 className="section-title noselect">
+            <RevealText text="Ils nous font confiance" />
           </h2>
           <LogoMarquee items={trustLogos} speed={48} simple />
         </div>
@@ -149,7 +151,7 @@ const HomeView: React.FC = () => {
           <a className="contact__link" href="mailto:contact@bpmclubsono.com">
             Contactez-nous à l'adresse contact@bpmclubsono.com
           </a>
-          <p className="contact__meta">développé par Nicolas & gentiment hebergé par Minet</p>
+          <p className="contact__meta">Développé par Nicolas et gentiment hebergé par Minet</p>
         </div>
       </section>
     </main>
