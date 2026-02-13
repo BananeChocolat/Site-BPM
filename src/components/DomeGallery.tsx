@@ -4,9 +4,9 @@ import "./DomeGallery.css";
 
 type DomeImage =
   | {
-      src: string;
-      alt?: string;
-    }
+    src: string;
+    alt?: string;
+  }
   | string;
 
 const DEFAULT_IMAGES: DomeImage[] = [

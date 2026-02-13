@@ -619,10 +619,9 @@ const MagicBento = ({
                         style={
                           card.imageOffsetY !== undefined
                             ? {
-                                transform: `translateY(${
-                                  typeof card.imageOffsetY === "number" ? `${card.imageOffsetY}px` : card.imageOffsetY
+                              transform: `translateY(${typeof card.imageOffsetY === "number" ? `${card.imageOffsetY}px` : card.imageOffsetY
                                 })`
-                              }
+                            }
                             : undefined
                         }
                       />
@@ -761,10 +760,9 @@ const MagicBento = ({
                       style={
                         card.imageOffsetY !== undefined
                           ? {
-                              transform: `translateY(${
-                                typeof card.imageOffsetY === "number" ? `${card.imageOffsetY}px` : card.imageOffsetY
+                            transform: `translateY(${typeof card.imageOffsetY === "number" ? `${card.imageOffsetY}px` : card.imageOffsetY
                               })`
-                            }
+                          }
                           : undefined
                       }
                     />
