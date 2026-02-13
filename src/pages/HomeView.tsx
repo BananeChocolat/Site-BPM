@@ -161,10 +161,10 @@ const HomeView: React.FC = () => {
       <section className="contact">
         <div>
           <p className="contact__title">Vous cherchez une prestation ?</p>
-          <a className="contact__link" href="mailto:contact@bpmclubsono.fr">
-            Contactez nous à l'adresse contact@bpmclubsono.fr
+          <a className="contact__link" href="mailto:contact@bpmclubsono.com">
+            Contactez-nous à l'adresse contact@bpmclubsono.com
           </a>
-          <p className="contact__meta">developper par Nicolas Riedel & gentiment hegerger par minet</p>
+          <p className="contact__meta">développé par Nicolas & gentiment hebergé par Minet</p>
         </div>
       </section>
     </main>
