@@ -70,7 +70,7 @@ const HomeView: React.FC = () => {
           <div className="hero__title">
             <h1>
               <span className="hero__big">Club</span>
-              <span className="hero__sub">light / sono</span>
+              <span className="hero__sub">Light  & Sono</span>
             </h1>
           </div>
           <div className="hero__logo">

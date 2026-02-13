@@ -49,7 +49,7 @@ export const equipmentCards: EquipmentCard[] = [
   {
     id: "qsc-ks118",
     label: "Basses",
-    title: "QSC sKS118",
+    title: "QSC KS118",
     description: "Caisson de basses performant, grave profond et percutant.",
     image: img_KS118,
     gridColumn: "1 / span 2",
@@ -68,7 +68,7 @@ export const equipmentCards: EquipmentCard[] = [
     id: "grandma-command-wing",
     label: "Contrôle",
     title: "GrandMA Command Wing",
-    description: "Contrôleur lumière pro pour une gestion fine des shows.",
+    description: "Contrôleur lumière professionel pour la gestion des shows.",
     gridColumn: "4 / span 1",
     gridRow: "2"
   }
